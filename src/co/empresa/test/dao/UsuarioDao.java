@@ -1,9 +1,15 @@
 package co.empresa.test.dao;
 
 import java.sql.ResultSet;
+
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+
 import com.mysql.jdbc.PreparedStatement;
 import co.empresa.test.modelo.Usuario;
 import co.empresa.test.util.Conexion;
@@ -29,6 +35,8 @@ public class UsuarioDao {
 	
 	public void insert(Usuario usuario) throws SQLException {
 		try{
+			//validarEmail(null);
+			
 			PreparedStatement preparedStatement = (PreparedStatement) conexion.setPreparedStatement(INSERT_USUARIO_SQL);
 			preparedStatement.setString(1, usuario.getNombre());
 			preparedStatement.setString(2, usuario.getEmail());
@@ -38,12 +46,12 @@ public class UsuarioDao {
 			
 		}
 	}
+
 	
 	public void delete(int id) throws SQLException{
 		try{
 			PreparedStatement preparedStatement = (PreparedStatement) conexion.setPreparedStatement(DELETE_USUARIO_SQL);
-			preparedStatement.setInt(1, id);
-			
+			preparedStatement.setInt(1, id);			
 			conexion.execute();			
 		}catch(SQLException e){
 			
